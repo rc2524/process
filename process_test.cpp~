@@ -26,13 +26,13 @@ int main(int argc, char *argv[])
 	Process myproc(args,true);
     //write/read test
     for(int n=0; n<5; ++n) {
-	stringstream ss(line);
-	ss << "This is test " << n << endl;
-	line = ss.str();
-	cerr << "calling write with line=" << line << "END" << endl;
-	myproc.write(line);
-	output = myproc.read();
-	cerr << "output from process: " << output << "END" << endl;
+		stringstream ss(line);
+		ss << "This is test " << n;
+		line = ss.str();
+		cerr << "calling write with line=" << line << "\tEND" << endl;
+		myproc.write(line);
+		output = myproc.read();
+		cerr << "output from process: " << output << "\tEND" << endl;
     }
     //
 	sleep(5);

@@ -23,9 +23,10 @@ int main()
     size_t nn=0;
     while(1)
     {
-//		char temp_for_dbg[64];
-//		cin >> temp_for_dbg;
-//		cerr << temp_for_dbg << endl;
+    	char temp_for_dbg[64];
+    	cerr << "running" << endl;
+    	cin >> temp_for_dbg;
+    	cerr << temp_for_dbg << endl;
 		cout << nn++ << " " << flush;
 		sleep(1);
     }

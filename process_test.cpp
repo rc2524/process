@@ -11,10 +11,11 @@ int main(int argc, char *argv[])
     using namespace std;
     std::vector<char*> args;
 
-    for(int nn=1; nn<argc; ++nn)
-    {
-	std::cerr << "Arg: " << argv[nn] << std::endl;
-	args.push_back(argv[nn]);
+//	for(int nn=1; nn<argc; ++nn)
+	{
+//	std::cerr << "Arg: " << argv[nn] << std::endl;
+/**/args.push_back("./child");
+//	args.push_back(argv[nn]);
     }
     args.push_back( NULL );
 
@@ -26,13 +27,13 @@ int main(int argc, char *argv[])
 	Process myproc(args,true);
     //write/read test
     for(int n=0; n<5; ++n) {
-	stringstream ss(line);
-	ss << "This is test " << n << endl;
-	line = ss.str();
-	cerr << "calling write with line=" << line << "END" << endl;
-//	myproc.write(line);
-	output = myproc.read();
-	cerr << "output from process: " << output << "END" << endl;
+		stringstream ss(line);
+		ss << "This is test " << n;
+		line = ss.str();
+		cerr << "calling write with line=" << line << "\tEND" << endl;
+		myproc.write(line);
+		output = myproc.read();
+		cerr << "output from process: " << output << "\tEND" << endl;
     }
     //
 	sleep(5);

@@ -33,15 +33,11 @@ Process::Process(const std::vector<char*>& args, bool verbose) :
     } else { 
 		/* parent process */
 		close(CHILD_WRITE);
-//		dup2(m_readpipe[0], 0);
 		close(CHILD_READ);
-//		dup2(m_writepipe[1],1);
-	
 		
 		m_pread = fdopen(PARENT_READ, "r");
-		m_pwrite = fdopen(PARENT_WRITE, "a");
-		
-		
+		m_pwrite = fdopen(PARENT_WRITE, "w");
+	
 		
 		if (verbose)
 			std::cerr << "Process " << m_name << ": forked PID " << m_pid << std::endl;
@@ -50,8 +46,8 @@ Process::Process(const std::vector<char*>& args, bool verbose) :
 
 Process::~Process()
 {   
-	fclose(m_pread);
     fclose(m_pwrite);
+    fclose(m_pread);
     
     if (verbose)
 		std::cerr << "Process " << m_name << ": Entering ~Process()" << std::endl;
@@ -68,11 +64,11 @@ Process::~Process()
 };
 
 void Process::write(const std::string& message) {
-	std::string message;
-	char *tempString = NULL;
-	size_t numBytes = 0;
+//	m_pwrite = fdopen(PARENT_WRITE, "a");
 	
-	getline(&tempString, &numBytes, m_pread);
+	fprintf(m_pwrite, message.c_str());
+
+//	fclose(m_pwrite);
 }
 
 std::string Process::read() {
@@ -80,7 +76,11 @@ std::string Process::read() {
 	char *tempString = NULL;
 	size_t numBytes = 0;
 	
+//	m_pread = fdopen(PARENT_READ, "r");
+
+	
 	getline(&tempString, &numBytes, m_pread);
 	message = tempString;
+//	fclose(m_pread);
 	return message;
 }
