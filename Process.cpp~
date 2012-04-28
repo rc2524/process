@@ -68,7 +68,9 @@ std::string Process::read() {
 	std::string message;
 //	size_t num_bytes = 0;
 	m_pread = fdopen(m_readpipe[0], "r");
-	m_pread >> message;
+	std::ifstream read;
+	read.open(m_pread);
+	read >> message;
 	fclose(m_pread);
 	return message;
 }
